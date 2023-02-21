@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+
+<body >
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown link
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    
+   <div id="main"style="display: flex; justify-content: center; align-items: center; margin-top: 5vh; ">
+    <div class="container" style=" border-radius: 20px;width: 20vw; height: 80vh; border: 2px solid green;display: flex; justify-content: center;align-items: center;">
+        <!-- Content here -->
+        <ul type="none" style="width: 100%; padding: 0; text-transform:uppercase ;"  >
+            <li>
+                <button type="button" style="width: 100%; text-transform:uppercase ;" id="greyscale" class="btn btn-outline-success btn-lg">greyScale</button>
+            </li><br>
+            <li>
+                <button type="button"  style="width: 100%; text-transform:uppercase ;" id="rotate" class="btn btn-outline-success btn-lg">rotate 90</button>
+            </li><br>
+            <li>
+                <button type="button"  style="width: 100%; text-transform:uppercase ;" id="invert" class="btn btn-outline-success btn-lg">invert</button>
+            </li><br>
+            <li>
+                <button type="button"  style="width: 100%; text-transform:uppercase ;" id="sepia" class="btn btn-outline-success btn-lg">sepia</button>
+            </li><br>
+            <li>
+                <button type="button"  style="width: 100%; text-transform:uppercase ;" id="mirror" class="btn btn-outline-success btn-lg">mirror</button>
+            </li><br>
+            <li>
+                <div>
+                    <div id="forbrightness" style="display: flex; justify-content: space-between; align-items: center;">
+                          <label for="brightness" class="form-label">Brightness </label> 
+                          <span>0</span>
+                    </div>
+                    <input  type="range" class="form-range"  min="-1" max="1" step="0.1" id="brightness">
+                </div>
+            </li>
+            <li>
+                <div>
+                    <div id="forcontrast" style="display: flex; justify-content: space-between; align-items: center;">
+                          <label for="constrant" class="form-label">contrast </label> 
+                          <span>0</span>
+                    </div>
+                    <input  type="range" class="form-range"  min="-1" max="1" step="0.1" id="constrant">
+                </div>
+            </li>
+        </ul>
+        
+<br>
+        
+       
+
+        
+
+    </div>
+    <div class="container"
+        style=" border-radius: 20px;
+        margin-right: 100px;  
+        width: 70vw; 
+        height: 80vh;
+         border: 2px solid green; 
+         display: flex; 
+         justify-content: center;
+          align-items: center;">
+        <img id="image" style="z-index:1 ; width: 30%; height: auto" src="/images/uploads/<%= arr[arr.length-1] %>" alt="">
+    </div>
+   </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"
+        integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        document.querySelector("#greyscale").addEventListener("click", function () {
+            var image = document.querySelector("#image").attributes.src.textContent;
+            // console.log(image)
+            var realname = image.split("/")[3] 
+            // console.log(realname)
+            axios.get(`/greyscale/${realname}`)
+                .then(function (data) {
+                    if (data) {
+                        console.log(data.data.arr[data.data.arr.length-1]);
+                        document.querySelector("img").src = `/images/uploads/${data.data.arr[data.data.arr.length-1]}`;
+
+                    }
+                })
+        })
+
+
+
+        document.querySelector("#rotate").addEventListener("click", function () {
+            var image = document.querySelector("#image").attributes.src.textContent;
+            // console.log(image)
+            var realname = image.split("/")[3] 
+            // console.log(realname)
+            axios.get(`/rotate/${realname}`)
+                .then(function (data) {
+                    if (data) {
+                        console.log(data.data.arr[data.data.arr.length-1]);
+                        document.querySelector("img").src = `/images/uploads/${data.data.arr[data.data.arr.length-1]}`;
+
+                    }
+                })
+        })
+        document.querySelector("#invert").addEventListener("click", function () {
+            var image = document.querySelector("#image").attributes.src.textContent;
+            // console.log(image)
+            var realname = image.split("/")[3] 
+            // console.log(realname)
+            axios.get(`/invert/${realname}`)
+                .then(function (data) {
+                    if (data) {
+                        console.log(data.data.arr[data.data.arr.length-1]);
+                        document.querySelector("img").src = `/images/uploads/${data.data.arr[data.data.arr.length-1]}`;
+
+                    }
+                })
+        })
+
+        document.querySelector("#sepia").addEventListener("click", function () {
+            var image = document.querySelector("#image").attributes.src.textContent;
+            // console.log(image)
+            var realname = image.split("/")[3] 
+            // console.log(realname)
+            axios.get(`/sepia/${realname}`)
+                .then(function (data) {
+                    if (data) {
+                        console.log(data.data.arr[data.data.arr.length-1]);
+                        document.querySelector("img").src = `/images/uploads/${data.data.arr[data.data.arr.length-1]}`;
+
+                    }
+                })
+        })
+
+        document.querySelector("#mirror").addEventListener("click", function () {
+            var image = document.querySelector("#image").attributes.src.textContent;
+            // console.log(image)
+            var realname = image.split("/")[3] 
+            // console.log(realname)
+            axios.get(`/mirror/${realname}`)
+                .then(function (data) {
+                    if (data) {
+                        console.log(data.data.arr[data.data.arr.length-1]);
+                        document.querySelector("img").src = `/images/uploads/${data.data.arr[data.data.arr.length-1]}`;
+
+                    }
+                })
+        })
+        document.querySelector("#brightness").addEventListener("change" , function(){
+            console.log(document.querySelector("#brightness").value);
+            document.querySelector("#forbrightness span").innerHTML = document.querySelector("#brightness").value;     
+            var image = document.querySelector("#image").attributes.src.textContent;
+            // console.log(image)
+            var realname = image.split("/")[3]
+            axios.get(`/brightness/${realname}/${document.querySelector("#brightness").value}`)
+                .then(function (data) {
+                    if (data) {
+                        console.log(data.data.arr[data.data.arr.length-1]);
+                        document.querySelector("img").src = `/images/uploads/${data.data.arr[data.data.arr.length-1]}`;
+
+                    }
+                })
+        })
+        document.querySelector("#constrant").addEventListener("change" , function(){
+            console.log(document.querySelector("#constrant").value);
+            document.querySelector("#forcontrast span").innerHTML = document.querySelector("#constrant").value; 
+            var image = document.querySelector("#image").attributes.src.textContent;
+            // console.log(image)
+            var realname = image.split("/")[3]
+            axios.get(`/constrant/${realname}/${document.querySelector("#constrant").value}`)
+                .then(function (data) {
+                    if (data) {
+                        console.log(data.data.arr[data.data.arr.length-1]);
+                        document.querySelector("img").src = `/images/uploads/${data.data.arr[data.data.arr.length-1]}`;
+
+                    }
+                })
+        })
+    </script>
+</body>
+
+</html>

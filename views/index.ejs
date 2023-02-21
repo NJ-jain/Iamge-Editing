@@ -1,0 +1,30 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  </head>
+  <body style="display: flex; justify-content: center; align-items: center; margin-top: 5vh;">
+   
+    <div class="container" style=" border-radius: 20px;  width: 70vw; height: 90vh; border: 2px solid green; display: flex; justify-content: center; align-items: center;">
+      <img id="upload" style="cursor: pointer;" src="/images/icons8-upload-100.png" alt="">
+      <h4 style="position: absolute; top: 60% ; left: 50%; transform: translate(-50% , 0%);" >Select image for editing....</h4>
+      <form action="/upload/single" method="post" enctype="multipart/form-data" style="display: none;">
+        <input type="file" name="file" id="file" />
+        <input type="submit" id="submit">
+      </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <script>
+          document.querySelector("#upload").addEventListener("click" , function(){
+              document.querySelector("#file").click();
+          })
+          document.querySelector("#file").addEventListener("change" , function(){
+            document.querySelector("#submit").click();
+          })
+    </script>
+  </body>
+</html>
